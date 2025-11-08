@@ -1,4 +1,4 @@
-const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
+const API_BASE_URL = 'https://budgetcalculater-backend.onrender.com/api';
 
 // Helper function to handle API requests
 const apiRequest = async (endpoint, options = {}) => {
