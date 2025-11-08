@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import './App.css';
 import ExpenseForm from './components/ExpenseForm';
 import ExpenseList from './components/ExpenseList';
@@ -16,13 +16,7 @@ function App() {
   const [salaries, setSalaries] = useState({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-
-  // Load expenses and salaries from API on mount and when month changes
-  useEffect(() => {
-    loadData();
-  }, [selectedMonth]);
-
-  const loadData = async () => {
+ const loadData = useCallback(async () => {
     try {
       setLoading(true);
       setError(null);
@@ -43,7 +37,14 @@ function App() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [selectedMonth]);
+  
+  // Load expenses and salaries from API on mount and when month changes
+  useEffect(() => {
+    loadData();
+  }, [loadData]);
+
+ 
 
   const addExpense = async (expense) => {
     try {
