@@ -160,19 +160,20 @@ export const predefinedExpenseAPI = {
       body: JSON.stringify({ startMonth, endMonth, predefinedExpenseIds }),
     });
   },
-  
 };
-
 
 // Health check
 export const healthCheck = async () => {
   return apiRequest('/health');
 };
 
-export default {
+// Assign object to a variable before default export to satisfy import/no-anonymous-default-export
+const api = {
   expenseAPI,
   salaryAPI,
   predefinedExpenseAPI,
   healthCheck,
 };
+
+export default api;
 
